@@ -1,0 +1,53 @@
+name: Проверка на сайта
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DNS
+        run: |
+          set +e
+          echo "== NS (кой управлява домейна) =="; dig +short NS ulpia.bg
+          echo "== whois nserver =="; whois ulpia.bg 2>/dev/null | grep -iE "nserver|name server|NAME SERVER" | head
+          for ns in $(dig +short NS ulpia.bg); do echo "== A ulpia.bg @ $ns =="; dig +short A ulpia.bg @$ns; echo "== www @ $ns =="; dig +short www.ulpia.bg @$ns; done
+          echo "== Google 8.8.8.8 =="; dig +short A ulpia.bg @8.8.8.8; dig +short www.ulpia.bg @8.8.8.8
+          echo "== Cloudflare 1.1.1.1 =="; dig +short A ulpia.bg @1.1.1.1; dig +short www.ulpia.bg @1.1.1.1
+          echo "== app =="; dig +short A app.ulpia.bg @8.8.8.8
+      - name: HTTP
+        run: |
+          set +e
+          for u in http://ulpia.bg https://ulpia.bg https://www.ulpia.bg http://www.ulpia.bg https://ulpia.bg/robots.txt https://ulpia.bg/sitemap.xml https://ulpia.bg/img/v/v1.jpg; do
+            echo "== $u =="; curl -s -o /dev/null -w "%{http_code} -> %{redirect_url} | %{size_download} bytes | %{time_total}s\n" "$u"; done
+          echo "== Сървър чрез IP 164.138.223.167 =="
+          curl -s --resolve ulpia.bg:443:164.138.223.167 https://ulpia.bg/ | grep -o "<title>[^<]*</title>\|Изберете апартамент\|Webflow" | sort | uniq -c
+          echo "== Публично =="
+          curl -s https://ulpia.bg/ | grep -o "<title>[^<]*</title>\|Изберете апартамент\|Webflow" | sort | uniq -c
+          echo "== SSL сертификат =="
+          echo | openssl s_client -connect 164.138.223.167:443 -servername ulpia.bg 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName
+          echo "== Supabase наличност =="
+          curl -s -X POST "https://nssznpasgxdpijlssemm.supabase.co/rest/v1/rpc/site_availability" -H "apikey: sb_publishable_gMbEfkIADsZcfXM9U28v0A_HFpu9925" -H "Authorization: Bearer sb_publishable_gMbEfkIADsZcfXM9U28v0A_HFpu9925" -H "Content-Type: application/json" -H "Origin: https://ulpia.bg" -d '{}' -D - -o /tmp/av.json | grep -i "^HTTP\|access-control-allow-origin"
+          python3 -c "import json;d=json.load(open('/tmp/av.json'));print('units',len(d['units']),'parking_free',d['parking_free'])"
+      - name: Lighthouse (телефон)
+        run: |
+          npx -y lighthouse@12.6.0 https://ulpia.bg/ --quiet --chrome-flags="--headless=new --no-sandbox --host-resolver-rules='MAP ulpia.bg 164.138.223.167'" --output=json --output-path=/tmp/lh.json || true
+          python3 - <<'P'
+          import json
+          try:
+            d=json.load(open('/tmp/lh.json'))
+          except Exception as e:
+            print('no report',e); raise SystemExit
+          print('URL', d.get('finalDisplayedUrl'))
+          for k,v in d['categories'].items(): print(k, round((v['score'] or 0)*100))
+          a=d['audits']
+          for k in ['first-contentful-paint','largest-contentful-paint','total-blocking-time','cumulative-layout-shift','speed-index','total-byte-weight']:
+            print(k, a[k].get('displayValue'))
+          print('--- проблеми ---')
+          for cat in ['performance','seo','accessibility','best-practices']:
+            for r in d['categories'][cat]['auditRefs']:
+              x=a[r['id']]
+              if x.get('score') is not None and x['score']<0.9 and r.get('weight',0)>0:
+                print(cat,'|',r['id'],'|',x.get('title'),'|',x.get('displayValue',''))
+          P

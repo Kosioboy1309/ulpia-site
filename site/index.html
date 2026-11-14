@@ -75,6 +75,7 @@ h1,h2,h3{margin:0;font-weight:400;line-height:1.02;text-wrap:balance}
 .kick i{width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:14px;display:inline-block}
 p.lead{font-size:clamp(18px,1.7vw,22px);line-height:1.55;max-width:46ch;color:var(--muted)}
 section{padding:120px 0;position:relative}
+main>section:not(.hero):not(.intro){content-visibility:auto;contain-intrinsic-size:auto 1000px}
 @media (max-width:700px){section{padding:80px 0}}
 
 /* round buttons */
@@ -687,5 +688,5 @@ function siteSource(){try{const q=new URLSearchParams(location.search);const u=q
 
 // photos outside the gallery open full screen too
 document.querySelectorAll("[data-lb]").forEach(el=>{el.style.cursor="zoom-in";el.addEventListener("click",()=>{const n=el.dataset.lb,i=G.findIndex(g=>g[0]===n);openLB(G.map(g=>({src:`img/v/${g[0]}-1800.webp`,cap:g[1]})),i<0?0:i);track("photo_open",{photo:n});});});
-renderAll();
+(window.requestIdleCallback||function(f){setTimeout(f,200)})(()=>renderAll(),{timeout:1500});
 </script></body></html>

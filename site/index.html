@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Улпия Коматево</title>
+<meta name="description" content="Нови апартаменти и магазини в кв. Коматево, Пловдив. Три сгради с южно изложение и изглед към Родопите. Вижте свободните имоти, плановете и изпратете запитване.">
+<meta property="og:title" content="Улпия · нови апартаменти в Коматево, Пловдив">
+<meta property="og:image" content="img/v/v1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: an architectural monograph. Roman capitals, light stone pages, graphite chapters, walnut accent taken from the facade cladding. */
+:root{
+  --stone:#ecebe7;
+  --paper:#f7f6f3;
+  --graphite:#22252a;
+  --graphite2:#2d3137;
+  --ink:#1d2024;
+  --muted:#6c7077;
+  --line:rgba(29,32,36,.14);
+  --walnut:#2f4a3a;
+  --walnut2:#9cc2a6;
+  --free:#3d8a5f; --res:#c0782f; --sold:#9b9fa6;
+  --serif:"Forum","Cormorant Garamond",Georgia,serif;
+  --sans:"Manrope","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+html,body{overflow-x:clip}
+.grid>*,.top>*,.head>*,.sel>*{min-width:0}
+.big,.mid{overflow-wrap:break-word}
+@media (max-width:520px){.big{font-size:40px}.mid{font-size:34px}.u .rm{display:none}.u{min-height:58px;padding:7px 8px}.u b{font-size:20px}}
+input[type=checkbox]{width:auto}
+h1,h2,h3{margin:0;font-weight:400;line-height:1.02;text-wrap:balance}
+.serif{font-family:var(--serif);text-transform:uppercase;letter-spacing:.01em}
+.big{font-family:var(--serif);text-transform:uppercase;font-size:clamp(44px,8vw,112px);line-height:.98;letter-spacing:-.005em}
+.mid{font-family:var(--serif);text-transform:uppercase;font-size:clamp(36px,5.4vw,72px);line-height:1}
+.wrap{max-width:1280px;margin:0 auto;padding:0 22px}
+.num{font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--walnut);outline-offset:3px;border-radius:8px}
+.dark{background:var(--graphite);color:#f1efea}
+.dark .muted,.dark p{color:#b7b9be}
+.kick{display:flex;align-items:center;gap:0;font-size:15px;font-weight:500;margin-bottom:26px}
+.kick::before{content:"";width:44px;height:1px;background:currentColor;margin-right:2px}
+.kick::after{content:"";order:-1}
+.kick i{width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:14px;display:inline-block}
+p.lead{font-size:clamp(18px,1.7vw,22px);line-height:1.55;max-width:46ch;color:var(--muted)}
+section{padding:120px 0;position:relative}
+@media (max-width:700px){section{padding:80px 0}}
+
+/* round buttons */
+.orb{width:clamp(150px,18vw,210px);aspect-ratio:1;border-radius:50%;background:var(--walnut);color:#fff;border:0;display:grid;place-content:center;justify-items:center;gap:14px;text-align:center;font:500 clamp(17px,1.6vw,21px) var(--sans);text-decoration:none;cursor:pointer;transition:transform .5s cubic-bezier(.2,.8,.2,1),background .3s}
+.orb svg{width:40px;height:14px;transition:transform .4s}
+.orb:hover{transform:scale(1.06);background:#22382b}
+.orb:hover svg{transform:translateX(6px)}
+.orb.light{background:var(--paper);color:var(--ink)}
+.orb.light:hover{background:#fff}
+.pillbtn{display:inline-flex;align-items:center;gap:14px;padding:16px 26px;border-radius:999px;background:var(--paper);color:var(--ink);border:1px solid var(--line);font:600 16px var(--sans);text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s}
+.pillbtn svg{width:22px;height:22px;flex:none}
+.pillbtn:hover{border-color:var(--ink)}
+.pillbtn.on{background:var(--walnut);color:#fff;border-color:var(--walnut)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;cursor:pointer;font:600 15px var(--sans);padding:16px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none}
+.btn:hover{background:var(--walnut)}
+
+/* header */
+.hdr{position:fixed;inset:14px 0 auto 0;z-index:40;pointer-events:none}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between}
+.hdr a,.hdr button{pointer-events:auto}
+.rbtn{width:64px;height:48px;border-radius:999px;border:0;background:var(--paper);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 18px -8px rgba(0,0,0,.35);text-decoration:none}
+.rbtn svg{width:22px;height:22px}
+.rbtn.call{width:56px;height:56px;border-radius:50%;background:var(--walnut);color:#fff}
+.wm{font-family:var(--serif);font-size:30px;letter-spacing:.32em;padding-left:.32em;color:#fff;text-decoration:none;transition:color .3s,opacity .3s;text-shadow:0 1px 14px rgba(0,0,0,.25)}
+.hdr.scrolled .wm{color:var(--ink);text-shadow:none;background:rgba(247,246,243,.88);backdrop-filter:blur(10px);padding:6px 14px 6px calc(14px + .32em);border-radius:999px;font-size:22px}
+.hdr.on-dark.scrolled .wm{background:rgba(34,37,42,.85);color:#f1efea}
+@media (max-width:520px){.wm{font-size:22px}}
+
+/* menu overlay */
+.menu{position:fixed;inset:0;z-index:50;background:var(--graphite);color:#f1efea;display:none;flex-direction:column;padding:90px 22px 30px;overflow:auto}
+.menu.open{display:flex}
+.menu nav{display:grid;gap:4px;max-width:1280px;margin:0 auto;width:100%}
+.menu nav a{font-family:var(--serif);text-transform:uppercase;font-size:clamp(40px,7vw,80px);line-height:1.08;color:#f1efea;text-decoration:none;display:flex;align-items:baseline;gap:18px}
+.menu nav a span{font:500 14px var(--sans);color:var(--walnut2)}
+.menu nav a:hover{color:var(--walnut2)}
+.menu .foot{max-width:1280px;margin:auto auto 0;width:100%;display:flex;flex-wrap:wrap;gap:12px 40px;padding-top:40px;color:#b7b9be}
+.menu .foot a{color:#f1efea;text-decoration:none;font-weight:600}
+.menu .x{position:absolute;top:14px;left:22px}
+
+/* hero */
+.hero{min-height:100svh;position:relative;overflow:hidden;background:#3b4256;display:flex;flex-direction:column;justify-content:flex-end;padding:0}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,22,30,.35),rgba(20,22,30,0) 30%,rgba(20,22,30,0) 60%,rgba(20,22,30,.55))}
+.hero .mark{position:absolute;left:0;right:0;top:11%;z-index:2;text-align:center;color:#fff;font-family:var(--serif);font-size:clamp(70px,17vw,250px);letter-spacing:.12em;padding-left:.12em;line-height:1;text-shadow:0 2px 40px rgba(0,0,0,.18)}
+.hero .mark small{display:block;font:500 clamp(12px,1.2vw,15px) var(--sans);letter-spacing:.5em;padding-left:.5em;margin-top:14px}
+.hero .bottom{position:relative;z-index:2;color:#fff;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:0 22px 84px;max-width:1280px;margin:0 auto;width:100%}
+.hero .bottom p{margin:0;font-size:16px;max-width:30ch}
+.hero .scroll{display:flex;align-items:center;gap:12px;font-size:14px;color:#fff;text-decoration:none}
+.hero .scroll span{width:46px;height:46px;border:1px solid rgba(255,255,255,.6);border-radius:50%;display:grid;place-items:center}
+@media (max-width:600px){.hero .mark{top:18%}.hero .bottom{flex-direction:column;align-items:flex-start}}
+
+/* intro collage */
+.intro .top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+@media (max-width:860px){.intro .top{grid-template-columns:1fr}}
+.collage{position:relative;margin-top:70px;height:clamp(420px,62vw,760px)}
+.collage figure{margin:0;position:absolute;overflow:hidden}
+.collage img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.collage.in img{transform:scale(1)}
+.c1{left:0;top:0;width:62%;height:78%}
+.c2{right:0;top:34%;width:44%;height:52%;box-shadow:-18px -18px 0 var(--stone)}
+.collage .orb{position:absolute;left:52%;bottom:0;transform:translate(-50%,0)}
+.collage .orb:hover{transform:translate(-50%,0) scale(1.06)}
+@media (max-width:700px){.c1{width:84%;height:62%}.c2{width:62%;top:46%;height:40%}.collage .orb{left:26%}}
+
+/* statement band */
+.state{padding:0}
+.state .img{height:clamp(320px,56vw,720px);overflow:hidden}
+.state .img img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.state .txt{padding:90px 0 120px}
+.state .txt .wrap{display:grid;grid-template-columns:1fr 2fr;gap:40px}
+@media (max-width:860px){.state .txt .wrap{grid-template-columns:1fr}}
+
+/* buildings */
+.bl3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+@media (max-width:900px){.bl3{grid-template-columns:1fr}}
+.bcol{display:flex;flex-direction:column;gap:18px}
+.bcol .ph{aspect-ratio:4/5;overflow:hidden;position:relative}
+.bcol .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s}
+.bcol:hover .ph img{transform:scale(1.04)}
+.bcol .ph b{position:absolute;left:18px;bottom:6px;font-family:var(--serif);font-size:130px;line-height:1;color:#fff;font-weight:400;text-shadow:0 2px 30px rgba(0,0,0,.3)}
+.bcol h3{font-family:var(--serif);text-transform:uppercase;font-size:30px}
+.bcol p{margin:0;color:var(--muted)}
+.bcol dl{display:grid;gap:0;margin:0}
+.bcol dl div{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:9px 0;font-size:15px}
+.bcol dt{color:var(--muted)}
+.bcol dd{margin:0;font-weight:600}
+.bcol .lnk{background:none;border:0;padding:0;font:600 15px var(--sans);color:var(--walnut);cursor:pointer;text-align:left}
+
+/* chooser */
+.choose .big{font-size:clamp(40px,6vw,88px)}
+.choose .head{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:end;margin-bottom:46px}
+@media (max-width:900px){.choose .head{grid-template-columns:1fr}}
+.choose .opts{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.bpick{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.bt{font-family:var(--serif);font-size:24px;width:62px;height:62px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.bt[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bt small{display:block;font:600 10px var(--sans);letter-spacing:.06em;margin-top:-4px}
+.tools{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center;margin-bottom:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 14px var(--sans);border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}
+.sel{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,430px);gap:24px;align-items:start}
+@media (max-width:980px){.sel{grid-template-columns:1fr}}
+.facade{background:var(--paper);border:1px solid var(--line);padding:28px 26px 0;position:relative}
+.fhead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.fhead b{font-family:var(--serif);font-weight:400;font-size:clamp(80px,10vw,130px);line-height:.8}
+.fhead span{text-align:right;color:var(--muted);font-size:14px}
+.fhead span strong{display:block;color:var(--ink);font-size:16px}
+.bld{display:grid;gap:6px;border-top:4px solid var(--ink);padding-top:10px}
+.floor{display:grid;grid-template-columns:36px 1fr;gap:10px}
+.flabel{font:600 12px var(--sans);color:var(--muted);display:flex;align-items:center;justify-content:flex-end}
+.units{display:grid;gap:6px}
+.u{min-height:68px;border:1px solid var(--line);background:#fff;cursor:pointer;text-align:left;padding:9px 11px;font:500 12px var(--sans);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;transition:background .2s,transform .2s,opacity .25s;position:relative}
+.u b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1}
+.u::after{content:"";position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%}
+.u.free::after{background:var(--free)}.u.reserved::after{background:var(--res)}.u.sold::after{background:var(--sold)}
+.u.sold{background:#efeeeb;color:#9a9da3}
+.u:hover{background:#e4ece6}
+.u[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.u.dim{opacity:.2}
+.ground{height:22px;margin:8px -26px 0;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 22px),#e3e1dc}
+.detail{background:var(--paper);border:1px solid var(--line);position:sticky;top:84px}
+.dt{display:flex;border-bottom:1px solid var(--line)}
+.dt button{flex:1;padding:14px;border:0;background:transparent;font:600 13px var(--sans);color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.dt button[aria-selected="true"]{color:var(--ink);border-color:var(--walnut)}
+.dimg{aspect-ratio:4/3;background:#fff;cursor:zoom-in;position:relative}
+.dimg img{width:100%;height:100%;object-fit:contain;padding:12px}
+.dimg span{position:absolute;right:12px;bottom:12px;font-size:12px;background:var(--ink);color:#fff;padding:5px 10px;border-radius:999px}
+.db{padding:22px 24px 26px}
+.st{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.st::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.st.free{color:var(--free)}.st.reserved{color:var(--res)}.st.sold{color:var(--sold)}
+.db h3{font-family:var(--serif);text-transform:uppercase;font-size:34px;margin:10px 0 2px}
+.db .sub{color:var(--muted);margin:0 0 18px;font-size:15px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:16px}
+.facts div{padding:12px 0}
+.facts div+div{padding-left:14px;border-left:1px solid var(--line)}
+.facts dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:600}
+.rooms{list-style:none;padding:0;margin:0 0 18px;columns:2;column-gap:22px;font-size:14px}
+.rooms li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line);break-inside:avoid}
+.rooms li span:last-child{color:var(--muted)}
+.db .btn{width:100%}
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:15px}
+th,td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+tbody tr{cursor:pointer}tbody tr:hover{background:#e4ece6}
+.hide{display:none!important}
+
+/* gallery carousel */
+.car{position:relative;margin-top:56px}
+.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 22px;scroll-padding:0 22px}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 min(82vw,1000px);aspect-ratio:16/10;scroll-snap-align:start;border:0;padding:0;cursor:zoom-in;position:relative;overflow:hidden;background:var(--graphite2)}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide span{position:absolute;left:20px;bottom:16px;color:#fff;font-size:14px;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.dots{display:flex;justify-content:center;gap:12px;margin-top:28px}
+.dots button{width:16px;height:16px;border-radius:50%;border:1.5px solid #f1efea;background:transparent;cursor:pointer;padding:0}
+.dots button[aria-current="true"]{background:#f1efea}
+
+/* location map */
+.loc .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+@media (max-width:900px){.loc .grid{grid-template-columns:1fr}}
+.map{width:100%;aspect-ratio:1;background:var(--paper);border-radius:50%;overflow:hidden;border:1px solid var(--line)}
+.near{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}
+.near div{aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-content:center;text-align:center;padding:18px}
+.near b{font-family:var(--serif);text-transform:uppercase;font-size:clamp(18px,2vw,24px);line-height:1.1;font-weight:400}
+.near span{font-size:13px;color:var(--muted);margin-top:6px}
+.near b.mn{font-size:clamp(34px,4.4vw,54px);text-transform:none}
+
+/* payment */
+.pay .rows{margin-top:56px;border-top:1px solid rgba(255,255,255,.18)}
+.pay .row{display:grid;grid-template-columns:minmax(120px,240px) 1fr auto;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.pay .row b{font-family:var(--serif);font-size:clamp(56px,8vw,104px);line-height:.9;font-weight:400}
+.pay .row h3{font-family:var(--serif);text-transform:uppercase;font-size:clamp(24px,2.6vw,34px)}
+.pay .row span{color:#b7b9be}
+.pay .row em{font-style:normal;color:var(--walnut2);font-size:14px;white-space:nowrap}
+@media (max-width:640px){.pay .row{grid-template-columns:1fr;gap:6px}}
+
+/* contact */
+.contact .grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+@media (max-width:900px){.contact .grid{grid-template-columns:1fr}}
+.cinfo{display:grid;margin-top:34px}
+.cinfo div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:16px 0}
+.cinfo dt{color:var(--muted)}
+.cinfo dd{margin:0;font-weight:600}
+.cinfo a{color:var(--ink);text-decoration:none}
+form{display:grid;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+input,select,textarea{font:16px var(--sans);padding:15px 16px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:0}
+input:focus,select:focus,textarea:focus{border-color:var(--ink);outline:none}
+textarea{min-height:120px;resize:vertical}
+input,select,textarea{width:100%;min-width:0}
+.near div{min-width:0}
+@media (max-width:520px){.near b{font-size:16px}.near div{padding:10px}}
+.consent{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+.consent input{margin-top:4px;accent-color:var(--walnut)}
+.msg{padding:14px 16px;font-size:15px;display:none}
+.msg.ok{display:block;background:#e3efe7;border-left:3px solid var(--free)}
+.msg.err{display:block;background:#f5e8dc;border-left:3px solid var(--res)}
+footer{background:var(--graphite);color:#b7b9be;padding:70px 0 90px;font-size:14px}
+footer .wm2{font-family:var(--serif);font-size:clamp(60px,14vw,200px);letter-spacing:.12em;color:#f1efea;line-height:1;margin-bottom:30px}
+footer .wrap>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
+footer a{color:#f1efea}
+.soc{display:inline-flex;gap:10px;align-items:center}
+.si{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid currentColor;color:inherit;text-decoration:none;transition:background .2s,color .2s}
+.si svg{width:20px;height:20px}
+.si:hover{background:var(--walnut);border-color:var(--walnut);color:#fff}
+footer .si,.menu .si{color:#f1efea}
+.cinfo .si{color:var(--ink)}
+.demo{position:fixed;right:14px;bottom:14px;z-index:45;background:var(--ink);color:#fff;font-size:12px;padding:7px 14px;border-radius:999px;max-width:220px;text-align:center;opacity:.92}
+.lb{position:fixed;inset:0;z-index:60;background:rgba(18,20,24,.95);display:none;align-items:center;justify-content:center;padding:60px 16px}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;object-fit:contain}
+.lb img.paper{background:#fff;padding:14px}
+.lb button{position:absolute;width:50px;height:50px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer}
+.lb .x{top:14px;right:14px}.lb .p{left:14px;top:50%}.lb .n{right:14px;top:50%}
+.lb .cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#b7b9be;font-size:14px}
+
+.cookie{position:fixed;left:14px;right:14px;bottom:14px;z-index:70;max-width:560px;margin:0 auto;background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:0 18px 50px -20px rgba(0,0,0,.45);padding:20px 22px;display:none}
+.cookie.show{display:block}
+.cookie p{margin:0 0 14px;font-size:14px;color:var(--muted)}
+.cookie b{display:block;font-family:var(--serif);text-transform:uppercase;font-size:22px;font-weight:400;margin-bottom:6px;color:var(--ink)}
+.cookie .row{display:flex;gap:10px;flex-wrap:wrap}
+.cookie .btn{padding:12px 20px}
+.cookie .no{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.cookie .no:hover{background:var(--stone);color:var(--ink)}
+.cklink{background:none;border:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+</style>
+</head>
+<body>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <button class="rbtn" id="m-open" aria-label="Меню" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 8h14M8 12h11M11 16h8"/></svg></button>
+    <a class="wm" href="#top">УЛПИЯ</a>
+    <a class="rbtn call" href="#kontakt" aria-label="Запитване"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 5h14v10H10l-4 4V5z"/></svg></a>
+  </div>
+</header>
+
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Меню">
+  <button class="rbtn x" id="m-close" aria-label="Затвори менюто"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <nav>
+    <a href="#kompleks"><span>01</span>Комплексът</a>
+    <a href="#sgradi"><span>02</span>Сградите</a>
+    <a href="#imoti"><span>03</span>Изберете апартамент</a>
+    <a href="#galeria"><span>04</span>Галерия</a>
+    <a href="#lokacia"><span>05</span>Локация</a>
+    <a href="#plashtane"><span>06</span>Плащане</a>
+    <a href="#kontakt"><span>07</span>Контакт</a>
+  </nav>
+  <div class="foot"><a href="tel:+359894611161">0894 611 161</a><a href="mailto:sales@ulpia.bg">sales@ulpia.bg</a><span class="soc"><a class="si" href="https://www.instagram.com/ulpiadevelopment/" rel="noopener" target="_blank" aria-label="Instagram на Улпия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a><a class="si" href="https://www.facebook.com/ulpiadevelopment/" rel="noopener" target="_blank" aria-label="Facebook на Улпия"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a></span><span>кв. Коматево, Пловдив</span></div>
+</div>
+
+<main id="top">
+<section class="hero" data-tone="dark">
+  <img src="img/v/v1.jpg" alt="Сгради А и Б по здрач, с магазините на партера" fetchpriority="high">
+  <div class="mark">УЛПИЯ<small>КОМАТЕВО · ПЛОВДИВ</small></div>
+  <div class="bottom">
+    <p>Три нови сгради с южно изложение и изглед към Родопите.</p>
+    <a class="scroll" href="#kompleks"><span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2v12M3 9l5 5 5-5"/></svg></span>Разгледайте</a>
+  </div>
+</section>
+
+<section class="intro" id="kompleks">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="kick"><i></i>Комплексът</div>
+        <h2 class="big">Дом с лице към Родопите</h2>
+      </div>
+      <p class="lead">Улпия са три сгради около общ вътрешен двор в кв. Коматево. Апартаментите гледат на юг, партерните имат собствен двор, а магазините и паркингът са до входа.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="collage" id="collage">
+      <figure class="c1"><img src="img/v/v2.jpg" alt="Двор на партерен апартамент и детската площадка" loading="lazy"></figure>
+      <figure class="c2"><img src="img/v/v7-s.jpg" alt="Сграда А вечер" loading="lazy"></figure>
+      <a class="orb" href="#sgradi">Сградите<svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 7h38M32 1l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="state dark" data-tone="dark">
+  <div class="img"><img src="img/v/v5.jpg" alt="Вътрешният двор и паркингът между сградите" loading="lazy"></div>
+  <div class="txt">
+    <div class="wrap">
+      <div class="kick"><i></i>Пространства</div>
+      <div>
+        <h2 class="big">Светли домове и тих двор за всеки ден</h2>
+        <p class="lead" style="margin-top:28px">Двустайни, тристайни и четиристайни апартаменти с големи прозорци и тераси. Детска площадка във вътрешния двор, паркоместа в комплекса.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sgradi">
+  <div class="wrap">
+    <div class="kick"><i></i>Сградите</div>
+    <h2 class="mid">Три сгради, всяка със свой характер</h2>
+    <div class="bl3">
+      <article class="bcol">
+        <div class="ph"><img src="img/v/v4-s.jpg" alt="Сграда А с магазините на партера" loading="lazy"><b>А</b></div>
+        <h3>Магазини и тристайни</h3>
+        <p>Пет етажа. На партера четири магазина със складове, над тях тристайни апартаменти с четири изложения.</p>
+        <dl><div><dt>Апартаменти</dt><dd>16 · 99–124 м²</dd></div><div><dt>Магазини</dt><dd>4 · 91–171 м²</dd></div></dl>
+        <button class="lnk" data-go="А">Апартаментите в сграда А →</button>
+      </article>
+      <article class="bcol">
+        <div class="ph"><img src="img/v/v2-s.jpg" alt="Партерен апартамент с двор" loading="lazy"><b>Б</b></div>
+        <h3>Само жилища</h3>
+        <p>Шест етажа с южно изложение. Партерните апартаменти са с двор, на последния етаж е пентхаус.</p>
+        <dl><div><dt>Апартаменти</dt><dd>21 · 64–142 м²</dd></div><div><dt>Пентхаус</dt><dd>тераса 73 м²</dd></div></dl>
+        <button class="lnk" data-go="Б">Апартаментите в сграда Б →</button>
+      </article>
+      <article class="bcol">
+        <div class="ph"><img src="img/v/v6-s.jpg" alt="Комплексът отвисоко" loading="lazy"><b>В</b></div>
+        <h3>Само жилища</h3>
+        <p>Разпределенията на сграда Б. Пентхаусът на последния етаж гледа на 360°.</p>
+        <dl><div><dt>Апартаменти</dt><dd>21 · 64–142 м²</dd></div><div><dt>Пентхаус</dt><dd>тераса 73 м²</dd></div></dl>
+        <button class="lnk" data-go="В">Апартаментите в сграда В →</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="choose" id="imoti" style="padding-top:40px">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="kick"><i></i>Наличност</div><h2 class="big">Изберете апартамент</h2></div>
+      <div class="opts">
+        <button class="pillbtn on" id="v-floor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V5l8-3 8 3v16M4 9h16M4 13h16M4 17h16M12 2v19"/></svg>По етажи</button>
+        <button class="pillbtn" id="v-table"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16"/></svg>Апартаментите в таблица</button>
+        <a class="pillbtn" href="#kontakt" id="v-park"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16v-4l2-5h12l2 5v4M4 16h16M4 16v2M20 16v2"/><circle cx="8" cy="14" r="1"/><circle cx="16" cy="14" r="1"/></svg>Паркоместа · <span id="park-n">54</span> свободни</a>
+      </div>
+    </div>
+    <div class="bpick" role="tablist" aria-label="Сграда" id="bpick"></div>
+    <div class="tools">
+      <div class="chips">
+        <button class="chip" data-r="2" aria-pressed="false" id="f-2">2-стайни</button>
+        <button class="chip" data-r="3" aria-pressed="false" id="f-3">3-стайни</button>
+        <button class="chip" data-r="4" aria-pressed="false" id="f-4">4-стайни</button>
+        <button class="chip" data-r="0" aria-pressed="false" id="f-0">Магазини</button>
+        <button class="chip" id="f-free" aria-pressed="false">Само свободни</button>
+      </div>
+      <div class="legend"><span><i style="background:var(--free)"></i>Свободен</span><span><i style="background:var(--res)"></i>Резервиран</span><span><i style="background:var(--sold)"></i>Продаден</span></div>
+    </div>
+    <div class="sel" id="sel">
+      <div class="facade"><div class="fhead"><b id="fac-letter">Б</b><span id="fac-desc"></span></div><div class="bld" id="bld"></div><div class="ground"></div></div>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </div>
+    <div class="tbl hide" id="tbl"><table><thead><tr><th>Имот</th><th>Сграда</th><th>Етаж</th><th>Стаи</th><th>Обща площ</th><th>Чиста площ</th><th>Изложение</th><th>Статус</th></tr></thead><tbody id="tbody"></tbody></table></div>
+  </div>
+</section>
+
+<section class="dark" id="galeria" data-tone="dark">
+  <div class="wrap"><div class="kick"><i></i>Галерия</div><h2 class="big">Как ще изглежда Улпия</h2></div>
+  <div class="car"><div class="track" id="track"></div><div class="dots" id="dots"></div></div>
+</section>
+
+<section class="loc" id="lokacia">
+  <div class="wrap grid">
+    <svg class="map" viewBox="0 0 600 600" role="img" aria-label="Схема на околността: детска градина, спирка с магазин и аптека, училище около комплекса в Коматево">
+      <rect width="600" height="600" fill="var(--paper)"/>
+      <g fill="none" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 5"><circle cx="300" cy="300" r="85"/><circle cx="300" cy="300" r="171"/><circle cx="300" cy="300" r="256"/></g>
+      <text transform="translate(367 365) rotate(0)" font-family="Manrope,sans-serif" font-size="11" fill="var(--muted)">250 м</text><text transform="translate(427 425) rotate(0)" font-family="Manrope,sans-serif" font-size="11" fill="var(--muted)">500 м</text>
+      <path d="M-66 484 L84 317 L154 185 L205 147 L244 87 L273 -30 L371 -200" stroke="#d6d2c9" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M300 300 L301 234 L309 84" stroke="#e1ddd5" stroke-width="8" fill="none" stroke-linecap="round"/>
+      <text transform="translate(110 327) rotate(-52)" font-family="Manrope,sans-serif" font-size="12" fill="var(--muted)">Коматевско шосе</text>
+      
+      <circle cx="301" cy="234" r="8" fill="var(--walnut)" stroke="var(--paper)" stroke-width="2.5"/><text x="313" y="239" text-anchor="start" font-family="Manrope,sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Детска градина</text><circle cx="219" cy="144" r="8" fill="var(--walnut)" stroke="var(--paper)" stroke-width="2.5"/><text x="205" y="149" text-anchor="end" font-family="Manrope,sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Спирка, магазин, аптека</text><circle cx="246" cy="87" r="8" fill="var(--walnut)" stroke="var(--paper)" stroke-width="2.5"/><text x="232" y="92" text-anchor="end" font-family="Manrope,sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Основно училище</text><circle cx="375" cy="68" r="8" fill="var(--walnut)" stroke="var(--paper)" stroke-width="2.5"/><text x="387" y="73" text-anchor="start" font-family="Manrope,sans-serif" font-size="14" font-weight="600" fill="var(--ink)">Частна градина</text>
+      <circle cx="300" cy="300" r="34" fill="var(--graphite)"/>
+      <g fill="none" stroke="#f1efea" stroke-width="1.3"><rect x="281" y="284" width="10" height="16"/><rect x="294" y="279" width="10" height="21"/><rect x="307" y="279" width="10" height="21"/></g>
+      <text x="300" y="317" text-anchor="middle" font-family="Forum,serif" font-size="11" letter-spacing="3" fill="#f1efea">УЛПИЯ</text>
+      <text x="371" y="18" text-anchor="middle" font-family="Manrope,sans-serif" font-size="12" fill="var(--muted)">↑ парк Коматево · центъра</text>
+      <text x="300" y="588" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" fill="var(--muted)">Схема по реалните разстояния · кръговете са през 250 м</text>
+    </svg>
+    <div>
+      <div class="kick"><i></i>Локация</div>
+      <h2 class="mid">Тихо и зелено, с бърз път към града</h2>
+      <p class="lead">Комплексът е в тиха улица в Коматево, на няколко минути пеша от детската градина, спирката и магазините, с гледка към Родопите.</p>
+      <div class="near">
+        <div><b class="mn">3 мин.</b><span>пеша до детската градина</span></div>
+        <div><b class="mn">9 мин.</b><span>пеша до спирката на градския транспорт</span></div>
+        <div><b class="mn">9 мин.</b><span>пеша до магазин и аптека</span></div>
+        <div><b class="mn">11 мин.</b><span>пеша до основното училище</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pay dark" id="plashtane" data-tone="dark">
+  <div class="wrap">
+    <div class="kick"><i></i>Схема на плащане</div>
+    <h2 class="big">Плащате, докато сградата расте</h2>
+    <div class="rows">
+      <div class="row"><b>3%</b><div><h3>Резервация</h3><span>Имотът се пази за вас 14 дни</span></div><em>приспада се от цената</em></div>
+      <div class="row"><b>30%</b><div><h3>Предварителен договор</h3><span>При подписване</span></div><em>общо 33%</em></div>
+      <div class="row"><b>40%</b><div><h3>Акт 14</h3><span>Завършен груб строеж</span></div><em>общо 73%</em></div>
+      <div class="row"><b>27%</b><div><h3>Акт 16</h3><span>Сградата е въведена в експлоатация</span></div><em>общо 100%</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap grid">
+    <div>
+      <div class="kick"><i></i>Контакт</div>
+      <h2 class="big">Елате на оглед</h2>
+      <p class="lead">Кажете ни кой имот ви интересува. Обаждаме се с цена, разпределение и удобен час.</p>
+      <dl class="cinfo">
+        <div><dt>Продажби</dt><dd><a href="tel:+359894611161">0894 611 161</a></dd></div>
+        <div><dt>Офис</dt><dd><a href="tel:+359894602260">0894 602 260</a></dd></div>
+        <div><dt>Имейл</dt><dd><a href="mailto:sales@ulpia.bg">sales@ulpia.bg</a></dd></div>
+        <div><dt>Последвайте ни</dt><dd><span class="soc"><a class="si" href="https://www.instagram.com/ulpiadevelopment/" rel="noopener" target="_blank" aria-label="Instagram на Улпия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a><a class="si" href="https://www.facebook.com/ulpiadevelopment/" rel="noopener" target="_blank" aria-label="Facebook на Улпия"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a></span></dd></div>
+      </dl>
+    </div>
+    <form id="form" novalidate>
+      <div class="row2">
+        <label for="f-name">Име<input id="f-name" autocomplete="name"></label>
+        <label for="f-phone">Телефон<input id="f-phone" type="tel" autocomplete="tel"></label>
+      </div>
+      <label for="f-email">Имейл (по желание)<input id="f-email" type="email" autocomplete="email"></label>
+      <label for="f-unit">Имот<select id="f-unit"><option value="">Още не съм избрал</option></select></label>
+      <label for="f-msg">Съобщение<textarea id="f-msg" placeholder="Например: търсим тристаен на висок етаж, с паркомясто"></textarea></label>
+      <label class="consent" for="f-gdpr"><input type="checkbox" id="f-gdpr"> Съгласен съм данните ми да се използват само за отговор на запитването.</label>
+      <div class="msg" id="f-res" role="status"></div>
+      <button class="btn" type="submit">Изпрати запитване</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer data-tone="dark">
+  <div class="wrap">
+    <div class="wm2">УЛПИЯ</div>
+    <div><span>© 2026 Улпия Дивелъпмънт ООД · кв. Коматево, Пловдив</span><span class="soc"><a class="si" href="https://www.instagram.com/ulpiadevelopment/" rel="noopener" target="_blank" aria-label="Instagram на Улпия"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a><a class="si" href="https://www.facebook.com/ulpiadevelopment/" rel="noopener" target="_blank" aria-label="Facebook на Улпия"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></a></span><span>Визуализациите са илюстративни · Политика за поверителност · <button class="cklink" id="ck-open">Бисквитки</button></span></div>
+  </div>
+</footer>
+
+<div class="cookie" id="cookie" role="dialog" aria-label="Бисквитки">
+  <b>Бисквитки</b>
+  <p>Ползваме бисквитки за анонимна статистика (Google Analytics и Microsoft Clarity), за да разберем как да подобрим сайта. Без вашето съгласие не ги включваме.</p>
+  <div class="row"><button class="btn" id="ck-yes">Приемам</button><button class="btn no" id="ck-no">Само необходимите</button></div>
+</div>
+<div class="demo">Тестова версия · наличност към 14.11.2026 · формата не изпраща</div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Голям изглед">
+  <button class="x" id="lb-x" aria-label="Затвори">×</button><button class="p" id="lb-p" aria-label="Предишна">‹</button>
+  <img id="lb-img" alt=""><button class="n" id="lb-n" aria-label="Следваща">›</button><div class="cap" id="lb-cap"></div>
+</div>
+<script>
+let U=[["a-1","А",1,"apartment",3,2,"Изток-север",112.51,102.4,"a1","a9.1 b4.9 b4.3 s2.5 p12.9 p13.9 d34 r6.2","reserved"],["a-2","А",2,"apartment",3,2,"Запад-север",115.07,105.1,"a2","a9.5 b4.5 b5 s2.5 p13.9 p14.6 d36 r5","reserved"],["a-3","А",3,"apartment",3,2,"Юг-запад",115.28,105.1,"a3","a9.5 b4.5 b5 s2.1 p13.9 p14.6 d36 r5","reserved"],["a-4","А",4,"apartment",3,2,"Юг-изток",111.81,101.7,"a4","a9.1 b4.9 b4.3 s2.5 p12.9 p13.9 d34 r6.2","free"],["a-5","А",5,"apartment",3,3,"Изток-север",112.72,102.4,"b1","a9.1 b4.9 b4.3 s2.5 p12.9 p13.9 d34 r6.2","free"],["a-6","А",6,"apartment",3,3,"Запад-север",115.28,105.1,"b2","a9.5 b4.5 b5 s2.5 p13.9 p14.6 d36 r5","free"],["a-7","А",7,"apartment",3,3,"Юг-запад",115.49,105.1,"b3","a9.5 b4.5 b5 s2.1 p13.9 p14.6 d36 r5","free"],["a-8","А",8,"apartment",3,3,"Юг-изток",112.02,101.7,"b4","a9.1 b4.9 b4.3 s2.5 p12.9 p13.9 d34 r6.2","reserved"],["a-9","А",9,"apartment",3,4,"Изток-север",112.72,102.4,"b1","a9.1 b4.9 b4.3 s2.5 p12.9 p13.9 d34 r6.2","free"],["a-10","А",10,"apartment",3,4,"Запад-север",115.28,105.1,"b2","a9.5 b4.5 b5 s2.5 p13.9 p14.6 d36 r5","free"],["a-11","А",11,"apartment",3,4,"Юг-запад",115.49,105.1,"b3","a9.5 b4.5 b5 s2.1 p13.9 p14.6 d36 r5","free"],["a-12","А",12,"apartment",3,4,"Юг-изток",112.02,101.7,"b4","a9.1 b4.9 b4.3 s2.5 p12.9 p13.9 d34 r6.2","free"],["a-13","А",13,"apartment",3,5,"Изток-север",110.7,101.1,"c1","a5.8 b4.3 w2.9 s1.4 p12 p12.4 d31.4 r20.1","free"],["a-14","А",14,"apartment",3,5,"Запад-север",114.69,105.1,"c2","a9.5 b4.5 b5 s2.5 p13.9 p14.6 d36 r4.9","free"],["a-15","А",15,"apartment",3,5,"Юг-запад",124.28,113.7,"c3","a7.7 b4.5 b3.8 s2.1 p13.3 p13.3 d31 r25.9","free"],["a-16","А",16,"apartment",2,5,"Юг-изток",99.17,90.5,"c4","a6 b3.2 s1.8 p12.8 d26.8 r31.6","free"],["a-m1","А",1,"shop",0,1,"",171.35,149,"s1","m86.8 s36.7 c3.4 w3.8","free"],["a-m2","А",2,"shop",0,1,"",158.93,138.2,"s2","m86.8 s31.3 c3.4 w3.8","free"],["a-m3","А",3,"shop",0,1,"",149.85,130.3,"s3","m86.8 s22.3 c2.2 w3.8","free"],["a-m4","А",4,"shop",0,1,"",91.08,79.2,"s4","m79.2 s13.2 c2.8 w4.9","free"],["b-1","Б",1,"apartment",3,1,"Юг-запад-север",104.42,95,"p1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d33 y23.8","sold"],["b-2","Б",2,"apartment",2,1,"Юг",64.02,58,"p2","a5.2 b3.8 s p12.2 d28.4 y30.1","sold"],["b-3","Б",3,"apartment",2,1,"Юг",64.02,58,"p3","a5.2 b3.8 s p12.2 d28.4 y30.1","free"],["b-4","Б",4,"apartment",3,1,"Юг-изток-север",104.54,95,"p4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d33 y23.8","free"],["b-5","Б",5,"apartment",3,2,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","sold"],["b-6","Б",6,"apartment",2,2,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","sold"],["b-7","Б",7,"apartment",2,2,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["b-8","Б",8,"apartment",3,2,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["b-9","Б",9,"apartment",3,3,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","sold"],["b-10","Б",10,"apartment",2,3,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","sold"],["b-11","Б",11,"apartment",2,3,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["b-12","Б",12,"apartment",3,3,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["b-13","Б",13,"apartment",3,4,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","sold"],["b-14","Б",14,"apartment",2,4,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","sold"],["b-15","Б",15,"apartment",2,4,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["b-16","Б",16,"apartment",3,4,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["b-17","Б",17,"apartment",3,5,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","sold"],["b-18","Б",18,"apartment",2,5,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","sold"],["b-19","Б",19,"apartment",2,5,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["b-20","Б",20,"apartment",3,5,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["b-21","Б",21,"apartment",4,6,"360°",142.12,121.9,"l1","a13 b4.6 b3.2 s2.6 p12.7 p12.7 p13.4 d38.7 r73.1","sold"],["v-1","В",1,"apartment",3,1,"Юг-запад-север",104.42,95,"p1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d33 y23.8","free"],["v-2","В",2,"apartment",2,1,"Юг",64.02,58,"p2","a5.2 b3.8 s p12.2 d28.4 y30.1","reserved"],["v-3","В",3,"apartment",2,1,"Юг",64.02,58,"p3","a5.2 b3.8 s p12.2 d28.4 y30.1","sold"],["v-4","В",4,"apartment",3,1,"Юг-изток-север",104.54,95,"p4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d33 y23.8","free"],["v-5","В",5,"apartment",3,2,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","reserved"],["v-6","В",6,"apartment",2,2,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","reserved"],["v-7","В",7,"apartment",2,2,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","reserved"],["v-8","В",8,"apartment",3,2,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","reserved"],["v-9","В",9,"apartment",3,3,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","reserved"],["v-10","В",10,"apartment",2,3,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["v-11","В",11,"apartment",2,3,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["v-12","В",12,"apartment",3,3,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["v-13","В",13,"apartment",3,4,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["v-14","В",14,"apartment",2,4,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["v-15","В",15,"apartment",2,4,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["v-16","В",16,"apartment",3,4,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["v-17","В",17,"apartment",3,5,"Юг-запад-север",106.88,96.4,"t1","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["v-18","В",18,"apartment",2,5,"Юг",65.71,59,"t2","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["v-19","В",19,"apartment",2,5,"Юг",65.71,59,"t3","a5.2 b3.8 s p12.2 d24.9 r5.2","free"],["v-20","В",20,"apartment",3,5,"Юг-изток-север",107.01,96.4,"t4","a9.3 b4.4 b4.3 s2.1 p13 p13.7 d29.6 r5","free"],["v-21","В",21,"apartment",4,6,"360°",142.12,121.9,"l1","a13 b4.6 b3.2 s2.6 p12.7 p12.7 p13.4 d38.7 r73.1","free"]]
+.map(r=>({id:r[0],b:r[1],n:r[2],k:r[3],r:r[4],f:r[5],e:r[6],a:r[7],an:r[8],p:r[9],l:r[10],s:r[11]}));
+const ST={free:"Свободен",reserved:"Резервиран",sold:"Продаден"};
+const RA={a:"Антре",b:"Баня с тоалетна",w:"Тоалетна",s:"Склад",p:"Спалня",d:"Дневна, кухня и трапезария",r:"Тераса",y:"Двор"};
+const RS={m:"Търговска зала",s:"Склад",c:"Съблекалня",w:"Тоалетна"};
+const BD={"А":"5 етажа · магазини на партера","Б":"6 етажа · само жилища","В":"6 етажа · само жилища"};
+const fmt=x=>x.toLocaleString("bg-BG",{minimumFractionDigits:2,maximumFractionDigits:2});
+const label=u=>u.k==="shop"?`Магазин ${u.n}`:`Апартамент ${u.b}${u.n}`;
+const kind=u=>u.k==="shop"?"Магазин":({2:"Двустаен",3:"Тристаен",4:"Четиристаен"})[u.r];
+const fl=f=>f===1?"Партер":`${f} етаж`;
+const $=id=>document.getElementById(id);
+let st={b:"Б",rooms:new Set(),free:false,sel:null,view:"plan",mode:"floor"};
+const ok=u=>!(st.free&&u.s!=="free")&&!(st.rooms.size&&!st.rooms.has(u.r));
+
+function renderPick(){
+  $("bpick").innerHTML=["А","Б","В"].map(b=>`<button class="bt" role="tab" id="pick-${b}" aria-selected="${st.b===b}" data-b="${b}" aria-label="Сграда ${b}">${b}<small>${U.filter(u=>u.b===b&&u.s==="free").length} св.</small></button>`).join("");
+  $("bpick").querySelectorAll(".bt").forEach(c=>c.onclick=()=>{st.b=c.dataset.b;st.sel=null;renderAll();});
+}
+function renderFacade(){
+  $("fac-letter").textContent=st.b;
+  const l=U.filter(u=>u.b===st.b);
+  $("fac-desc").innerHTML=`<strong>Сграда ${st.b}</strong>${BD[st.b]}<br>${l.filter(u=>u.s==="free").length} свободни от ${l.length}`;
+  const floors=[...new Set(l.map(u=>u.f))].sort((a,b)=>b-a);
+  $("bld").innerHTML=floors.map(f=>{const row=l.filter(u=>u.f===f).sort((a,b)=>a.n-b.n);
+    return `<div class="floor"><div class="flabel">${f===1?"П":f}</div><div class="units" style="grid-template-columns:${row.length===1?"1fr":`repeat(${row.length},1fr)`};${row.length===1?"margin:0 16%":""}">${
+      row.map(u=>`<button class="u ${u.s}${ok(u)?"":" dim"}" data-id="${u.id}" aria-pressed="${st.sel===u.id}" aria-label="${label(u)}, ${kind(u)}, ${fmt(u.a)} квадратни метра, ${ST[u.s]}"><b>${u.k==="shop"?"М"+u.n:u.n}</b><span><span class="rm">${u.k==="shop"?"Магазин":u.r+"-стаен"} · </span>${Math.round(u.a)} м²</span></button>`).join("")}</div></div>`}).join("");
+  $("bld").querySelectorAll(".u").forEach(b=>b.onclick=()=>{st.sel=b.dataset.id;renderDetail();if(innerWidth<980)$("detail").scrollIntoView({block:"start"});});
+}
+function renderDetail(){
+  let u=U.find(x=>x.id===st.sel);
+  if(!u||u.b!==st.b){u=U.filter(x=>x.b===st.b&&x.s==="free"&&ok(x))[0]||U.find(x=>x.b===st.b&&ok(x))||U.find(x=>x.b===st.b);st.sel=u.id;}
+  const map=u.k==="shop"?RS:RA;
+  const rooms=u.l.split(" ").map(t=>({k:t[0],v:parseFloat(t.slice(1))})).filter(x=>map[x.k]);
+  const src=st.view==="plan"?`img/plans/${u.p}.jpg`:`img/floors/${u.p}.jpg`;
+  $("detail").innerHTML=`<div class="dt" role="tablist"><button id="dt-plan" role="tab" aria-selected="${st.view==="plan"}">Разпределение</button><button id="dt-floor" role="tab" aria-selected="${st.view==="floor"}">Къде е на етажа</button></div>
+    <div class="dimg" id="dimg" role="button" tabindex="0" aria-label="Уголеми плана"><img src="${src}" alt="План на ${label(u).toLowerCase()}"><span>Уголеми</span></div>
+    <div class="db"><span class="st ${u.s}">${ST[u.s]}</span><h3>${label(u)}</h3><p class="sub">${kind(u)} · Сграда ${u.b} · ${fl(u.f)}${u.e?" · "+u.e:""}</p>
+    <dl class="facts"><div><dt>Обща</dt><dd class="num">${fmt(u.a)} м²</dd></div><div><dt>Чиста</dt><dd class="num">${fmt(u.an)} м²</dd></div><div><dt>${u.k==="shop"?"Тип":"Стаи"}</dt><dd>${u.k==="shop"?"Търговски":u.r}</dd></div></dl>
+    <ul class="rooms">${rooms.map(x=>`<li><span>${map[x.k]}</span><span class="num">${isNaN(x.v)?"":fmt(x.v)+" м²"}</span></li>`).join("")}</ul>
+    <button class="btn" id="d-go">${u.s==="sold"?"Питайте за подобен имот":"Запитване за "+(u.k==="shop"?"този магазин":"този апартамент")}</button></div>`;
+  $("dt-plan").onclick=()=>{st.view="plan";renderDetail();};
+  $("dt-floor").onclick=()=>{st.view="floor";renderDetail();};
+  const z=()=>openLB([{src,cap:label(u),paper:true}],0);
+  $("dimg").onclick=z;$("dimg").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();z();}};
+  $("d-go").onclick=()=>pick(u.s==="sold"?"":u.id);
+  document.querySelectorAll(".u").forEach(b=>b.setAttribute("aria-pressed",b.dataset.id===st.sel));
+}
+function renderTable(){
+  const rows=U.filter(ok).sort((a,b)=>a.b.localeCompare(b.b,"bg")||a.f-b.f||a.n-b.n);
+  $("tbody").innerHTML=rows.map(u=>`<tr data-id="${u.id}" data-b="${u.b}"><td><b>${label(u)}</b></td><td>${u.b}</td><td>${fl(u.f)}</td><td>${u.k==="shop"?"—":u.r}</td><td class="num">${fmt(u.a)} м²</td><td class="num">${fmt(u.an)} м²</td><td>${u.e||"—"}</td><td><span class="st ${u.s}">${ST[u.s]}</span></td></tr>`).join("")||`<tr><td colspan="8">Няма имоти по тези филтри.</td></tr>`;
+  $("tbody").querySelectorAll("tr[data-id]").forEach(r=>r.onclick=()=>{st.b=r.dataset.b;st.sel=r.dataset.id;setMode("floor");$("sel").scrollIntoView();});
+}
+function renderAll(){renderPick();renderFacade();renderDetail();renderTable();}
+function setMode(m){st.mode=m;$("sel").classList.toggle("hide",m!=="floor");$("bpick").classList.toggle("hide",m!=="floor");$("tbl").classList.toggle("hide",m!=="table");$("v-floor").classList.toggle("on",m==="floor");$("v-table").classList.toggle("on",m==="table");renderAll();}
+$("v-floor").onclick=()=>setMode("floor");$("v-table").onclick=()=>setMode("table");
+function pick(id){$("f-unit").value=id;$("kontakt").scrollIntoView();setTimeout(()=>$("f-name").focus({preventScroll:true}),450);}
+document.querySelectorAll(".chip[data-r]").forEach(c=>c.onclick=()=>{const r=+c.dataset.r;st.rooms.has(r)?st.rooms.delete(r):st.rooms.add(r);c.setAttribute("aria-pressed",st.rooms.has(r));
+  if(r===0&&st.rooms.has(0))st.b="А";if(r===4&&st.rooms.has(4)&&st.b==="А")st.b="В";st.sel=null;renderAll();});
+$("f-free").onclick=e=>{st.free=!st.free;e.currentTarget.setAttribute("aria-pressed",st.free);st.sel=null;renderAll();};
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{st.b=b.dataset.go;st.sel=null;setMode("floor");$("imoti").scrollIntoView();});
+
+// gallery carousel
+const G=[["v1","Сгради А и Б по здрач"],["v5","Вътрешният двор"],["v2","Двор на партерен апартамент"],["v4","Сграда А и магазините"],["v7","Сграда А вечер"],["v3","Комплексът отвисоко"],["v6","Комплексът и пътят"]];
+$("track").innerHTML=G.map((g,i)=>`<button class="slide" data-i="${i}" aria-label="Отвори: ${g[1]}"><img src="img/v/${g[0]}.jpg" alt="${g[1]}" loading="lazy"><span>${g[1]}</span></button>`).join("");
+$("dots").innerHTML=G.map((g,i)=>`<button aria-label="Снимка ${i+1}" aria-current="${i===0}" data-i="${i}"></button>`).join("");
+const tr=$("track"),slides=[...tr.children];
+slides.forEach(s=>s.onclick=()=>openLB(G.map(g=>({src:`img/v/${g[0]}.jpg`,cap:g[1]})),+s.dataset.i));
+$("dots").querySelectorAll("button").forEach(d=>d.onclick=()=>tr.scrollTo({left:slides[+d.dataset.i].offsetLeft-22,behavior:"smooth"}));
+tr.addEventListener("scroll",()=>{let i=0,best=1e9;slides.forEach((s,j)=>{const d=Math.abs(s.offsetLeft-22-tr.scrollLeft);if(d<best){best=d;i=j;}});$("dots").querySelectorAll("button").forEach((d,j)=>d.setAttribute("aria-current",j===i));},{passive:true});
+
+// lightbox
+let lbItems=[],lbI=0,lbBack=null;
+function showLB(){const it=lbItems[lbI];$("lb-img").src=it.src;$("lb-img").alt=it.cap;$("lb-img").className=it.paper?"paper":"";$("lb-cap").textContent=it.cap;$("lb-p").style.display=$("lb-n").style.display=lbItems.length>1?"":"none";}
+function openLB(items,i){lbBack=document.activeElement;lbItems=items;lbI=i;showLB();$("lb").classList.add("open");$("lb-x").focus();}
+function closeLB(){$("lb").classList.remove("open");lbBack&&lbBack.focus&&lbBack.focus();}
+$("lb-x").onclick=closeLB;$("lb-p").onclick=()=>{lbI=(lbI-1+lbItems.length)%lbItems.length;showLB();};$("lb-n").onclick=()=>{lbI=(lbI+1)%lbItems.length;showLB();};
+$("lb").onclick=e=>{if(e.target.id==="lb")closeLB();};
+
+// menu
+const openM=()=>{$("menu").classList.add("open");$("m-open").setAttribute("aria-expanded","true");$("m-close").focus();};
+const closeM=()=>{$("menu").classList.remove("open");$("m-open").setAttribute("aria-expanded","false");};
+$("m-open").onclick=openM;$("m-close").onclick=closeM;$("menu").querySelectorAll("a").forEach(a=>a.addEventListener("click",closeM));
+addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();if($("lb").classList.contains("open"))closeLB();}
+  if($("lb").classList.contains("open")){if(e.key==="ArrowLeft")$("lb-p").click();if(e.key==="ArrowRight")$("lb-n").click();}});
+
+// header tone + collage reveal
+const hdr=$("hdr"),darks=[...document.querySelectorAll("[data-tone=dark]")];
+function onS(){hdr.classList.toggle("scrolled",scrollY>innerHeight*.6);const y=40;hdr.classList.toggle("on-dark",darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y;}));}
+addEventListener("scroll",onS,{passive:true});onS();
+if("IntersectionObserver" in window){new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect();}}),{threshold:.25}).observe($("collage"));}else $("collage").classList.add("in");
+
+// form
+["А","Б","В"].forEach(b=>{const g=document.createElement("optgroup");g.label="Сграда "+b;
+  U.filter(u=>u.b===b&&u.s!=="sold").sort((x,y)=>x.f-y.f||x.n-y.n).forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=`${label(u)} · ${kind(u)} · ${Math.round(u.a)} м² · ${fl(u.f)}${u.s==="reserved"?" (резервиран)":""}`;g.appendChild(o);});$("f-unit").appendChild(g);});
+$("form").addEventListener("submit",async e=>{e.preventDefault();const r=$("f-res"),btn=e.target.querySelector("button[type=submit]");
+  if(!$("f-name").value.trim()||!$("f-phone").value.trim()){r.className="msg err";r.textContent="Попълнете име и телефон, за да можем да ви се обадим.";return;}
+  if(!$("f-gdpr").checked){r.className="msg err";r.textContent="Отметнете съгласието за обработка на данните.";return;}
+  btn.disabled=true;btn.textContent="Изпращане…";
+  try{const res=await rpc("site_inquiry",{p_name:$("f-name").value,p_phone:$("f-phone").value,p_email:$("f-email").value,p_unit:$("f-unit").value,p_message:$("f-msg").value,p_source:siteSource()});
+    if(!res.ok)throw new Error(await res.text());
+    r.className="msg ok";r.textContent="Благодарим! Получихме запитването и ще ви се обадим скоро.";e.target.reset();}
+  catch(err){r.className="msg err";r.innerHTML=String(err).includes("rate_limited")?"Получихме вече няколко запитвания от този номер. Ще се свържем с вас.":"Нещо се обърка при изпращането. Обадете ни се на <a href=\"tel:+359894611161\">0894 611 161</a>.";}
+  finally{btn.disabled=false;btn.textContent="Изпрати запитване";}});
+
+// analytics: loads only after consent; IDs are filled in when the site goes live
+const GA_ID="G-TQFCB4MT7L",CLARITY_ID="zdijdq4gs0";
+let ckState=null;try{ckState=localStorage.getItem("ulpia-ck");}catch(e){}
+function track(name,params){try{window.gtag&&gtag("event",name,params||{});window.clarity&&clarity("event",name);}catch(e){}}
+function loadAnalytics(){
+  if(GA_ID&&!window.gtag){const sc=document.createElement("script");sc.async=true;sc.src="https://www.googletagmanager.com/gtag/js?id="+GA_ID;document.head.appendChild(sc);
+    window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag("js",new Date());gtag("config",GA_ID,{anonymize_ip:true});}
+  if(CLARITY_ID&&!window.clarity){(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script",CLARITY_ID);}
+}
+function setCk(v){ckState=v;try{localStorage.setItem("ulpia-ck",v);}catch(e){}$("cookie").classList.remove("show");if(v==="yes")loadAnalytics();}
+$("ck-yes").onclick=()=>setCk("yes");$("ck-no").onclick=()=>setCk("no");$("ck-open").onclick=()=>$("cookie").classList.add("show");
+if(ckState==="yes")loadAnalytics();else if(!ckState)$("cookie").classList.add("show");
+// events worth counting
+document.addEventListener("click",e=>{const a=e.target.closest("a,button");if(!a)return;
+  if(a.href&&a.href.startsWith("tel:"))track("call_click");
+  else if(a.href&&a.href.startsWith("mailto:"))track("email_click");
+  else if(a.classList.contains("si"))track("social_click",{network:a.getAttribute("aria-label")});
+  else if(a.classList.contains("u"))track("unit_view",{unit:a.dataset.id});
+  else if(a.id==="d-go")track("unit_inquiry_click",{unit:st.sel});
+  else if(a.id==="v-table")track("table_view");
+});
+$("form").addEventListener("submit",()=>{if($("f-name").value.trim()&&$("f-phone").value.trim()&&$("f-gdpr").checked)track("inquiry_sent",{unit:$("f-unit").value||"none"});});
+
+// live data from the Ulpia app (falls back to the snapshot above if unreachable)
+const SB_URL="https://nssznpasgxdpijlssemm.supabase.co",SB_KEY="sb_publishable_gMbEfkIADsZcfXM9U28v0A_HFpu9925";
+const LIVE=/(^|\.)ulpia\.bg$/.test(location.hostname);
+function rpc(fn,body){return fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{"apikey":SB_KEY,"Authorization":"Bearer "+SB_KEY,"Content-Type":"application/json"},body:JSON.stringify(body||{})});}
+function refreshCounts(pf){
+  const sf=$("st-free");if(sf)sf.textContent=U.filter(u=>u.k==="apartment"&&u.s==="free").length;
+  const ss=$("st-shop");if(ss)ss.textContent=U.filter(u=>u.k==="shop"&&u.s==="free").length;
+  if(pf!=null&&$("park-n"))$("park-n").textContent=pf;
+}
+function fillUnitSelect(){const sel=$("f-unit"),keep=sel.value;sel.querySelectorAll("optgroup").forEach(g=>g.remove());
+  ["А","Б","В"].forEach(b=>{const g=document.createElement("optgroup");g.label="Сграда "+b;
+  U.filter(u=>u.b===b&&u.s!=="sold").sort((x,y)=>x.f-y.f||x.n-y.n).forEach(u=>{const o=document.createElement("option");o.value=u.id;o.textContent=`${label(u)} · ${kind(u)} · ${Math.round(u.a)} м² · ${fl(u.f)}${u.s==="reserved"?" (резервиран)":""}`;g.appendChild(o);});sel.appendChild(g);});sel.value=keep;}
+rpc("site_availability").then(r=>r.ok?r.json():Promise.reject(r.status)).then(d=>{
+  if(d&&Array.isArray(d.units)&&d.units.length){U=d.units.map(u=>({...u,a:+u.a,an:+u.an}));fillUnitSelect();renderAll();refreshCounts(d.parking_free);}
+}).catch(()=>{});
+if(LIVE){const dm=document.querySelector(".demo");if(dm)dm.remove();}
+function siteSource(){try{const q=new URLSearchParams(location.search);const u=q.get("utm_source");if(u)return u+(q.get("utm_campaign")?" / "+q.get("utm_campaign"):"");
+  if(document.referrer){const h=new URL(document.referrer).hostname;if(!/ulpia\.bg$/.test(h))return h.replace(/^www\.|^m\.|^l\./,"");}}catch(e){}return "директно";}
+renderAll();
+</script></body></html>

@@ -1,0 +1,32 @@
+name: Качване на сайта в SuperHosting
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-site
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ${{ secrets.FTP_SERVER }}
+    steps:
+      - name: Проверка за FTP данни
+        if: env.FTP_SERVER == ''
+        run: echo "Няма въведени FTP данни в Secrets – качването се пропуска."
+      - uses: actions/checkout@v4
+        if: env.FTP_SERVER != ''
+      - name: Качване по FTP (само файловете на сайта; нищо друго в папката не се трие)
+        if: env.FTP_SERVER != ''
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./site/
+          server-dir: ./

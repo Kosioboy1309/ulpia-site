@@ -47,6 +47,10 @@ jobs:
           a=d['audits']
           for k in ['first-contentful-paint','largest-contentful-paint','total-blocking-time','cumulative-layout-shift','speed-index','total-byte-weight']:
             print(k, a[k].get('displayValue'))
+          print('MAIN',[(i['groupLabel'],round(i['duration'])) for i in a['mainthread-work-breakdown']['details']['items']])
+          print('BOOT',[(i.get('url','')[-50:],round(i.get('total',0)),round(i.get('scripting',0))) for i in a['bootup-time']['details']['items'][:6]])
+          print('LONG',[(i.get('url','')[-50:],round(i['duration']),round(i.get('startTime',0))) for i in a.get('long-tasks',{}).get('details',{}).get('items',[])[:10]])
+          print('3RD',[(i.get('entity',''),round(i.get('mainThreadTime',0)),round(i.get('transferSize',0)/1024)) for i in a.get('third-party-summary',{}).get('details',{}).get('items',[])[:8]])
           print('--- проблеми ---')
           for cat in ['performance','seo','accessibility','best-practices']:
             for r in d['categories'][cat]['auditRefs']:

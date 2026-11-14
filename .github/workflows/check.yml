@@ -24,7 +24,10 @@ jobs:
           echo "== Сървър чрез IP 164.138.223.167 =="
           curl -s --resolve ulpia.bg:443:164.138.223.167 https://ulpia.bg/ | grep -o "<title>[^<]*</title>\|Изберете апартамент\|Webflow" | sort | uniq -c
           echo "== Публично =="
-          curl -s https://ulpia.bg/ | grep -o "<title>[^<]*</title>\|Изберете апартамент\|Webflow" | sort | uniq -c
+          curl -s https://ulpia.bg/ -o /tmp/p.html; grep -o "<title>[^<]*</title>" /tmp/p.html
+          echo "Изберете апартамент: $(grep -c 'Изберете апартамент' /tmp/p.html) | Webflow: $(grep -ci webflow /tmp/p.html) | JSON-LD: $(grep -c 'application/ld+json' /tmp/p.html) | h1: $(grep -c '<h1' /tmp/p.html)"
+          for u in https://ulpia.bg/img/v/v1-1200.webp https://ulpia.bg/fonts/forum-cyrillic-400-normal.woff2 https://ulpia.bg/img/plans/p3.webp https://ulpia.bg/favicon.svg; do curl -s -o /dev/null -w "$u %{http_code} %{content_type}\n" $u; done
+          curl -sI https://ulpia.bg/img/v/v1-1200.webp | grep -i "cache-control\|expires\|strict"
           echo "== SSL сертификат =="
           echo | openssl s_client -connect 164.138.223.167:443 -servername ulpia.bg 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName
           echo "== Supabase наличност =="

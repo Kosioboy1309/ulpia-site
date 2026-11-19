@@ -95,6 +95,8 @@ main>section:not(.hero):not(.intro){content-visibility:auto;contain-intrinsic-si
 
 /* header */
 .hdr{position:fixed;inset:14px 0 auto 0;z-index:40;pointer-events:none}
+.hdr .wm{opacity:0;transform:translateY(14px) scale(1.5);transform-origin:50% 0;transition:opacity .5s,transform .6s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.hdr.showwm .wm{opacity:1;transform:none;pointer-events:auto}
 .hdr .wrap{display:flex;align-items:center;justify-content:space-between}
 .hdr a,.hdr button{pointer-events:auto}
 .rbtn{width:64px;height:48px;border-radius:999px;border:0;background:var(--paper);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 18px -8px rgba(0,0,0,.35);text-decoration:none}
@@ -630,7 +632,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();if($("lb").classLis
 
 // header tone + collage reveal
 const hdr=$("hdr"),darks=[...document.querySelectorAll("[data-tone=dark]")];
-function onS(){hdr.classList.toggle("scrolled",scrollY>innerHeight*.6);const y=40;hdr.classList.toggle("on-dark",darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y;}));}
+function onS(){const mk=document.querySelector(".hero .mark");hdr.classList.toggle("showwm",!mk||mk.getBoundingClientRect().bottom<70);hdr.classList.toggle("scrolled",scrollY>innerHeight*.6);const y=40;hdr.classList.toggle("on-dark",darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y;}));}
 addEventListener("scroll",onS,{passive:true});onS();
 if("IntersectionObserver" in window){new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect();}}),{threshold:.25}).observe($("collage"));}else $("collage").classList.add("in");
 

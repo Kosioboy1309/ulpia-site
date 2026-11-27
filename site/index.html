@@ -120,8 +120,8 @@ main>section:not(.hero):not(.intro){content-visibility:auto;contain-intrinsic-si
 
 /* hero */
 .hero{min-height:100svh;position:relative;overflow:hidden;background:#3b4256;display:flex;flex-direction:column;justify-content:flex-end;padding:0}
-.hero img{position:absolute;inset:-4% 0 0 0;width:100%;height:108%;object-fit:cover;object-position:50% 70%;transform-origin:60% 55%;animation:kb 28s ease-in-out infinite alternate;will-change:transform}
-@keyframes kb{0%{transform:translate3d(0,var(--py,0px),0) scale(1.04)}100%{transform:translate3d(-2.5%,calc(var(--py,0px) - 1.5%),0) scale(1.14)}}
+.hero img{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;object-fit:cover;object-position:50% 70%;transform-origin:60% 55%;animation:kb 28s ease-in-out infinite alternate;will-change:transform}
+@keyframes kb{0%{transform:translate3d(0,0,0) scale(1.04)}100%{transform:translate3d(-2.5%,-1.5%,0) scale(1.14)}}
 @media (prefers-reduced-motion:reduce){.hero img{animation:none}}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,22,30,.35),rgba(20,22,30,0) 30%,rgba(20,22,30,0) 60%,rgba(20,22,30,.55))}
 .hero .mark{margin:0;font-weight:400;position:absolute;left:0;right:0;top:11%;z-index:2;text-align:center;color:#fff;font-family:var(--serif);font-size:clamp(70px,17vw,250px);letter-spacing:.12em;padding-left:.12em;line-height:1;text-shadow:0 2px 40px rgba(0,0,0,.18)}
@@ -633,7 +633,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"){closeM();if($("lb").classLis
 // header tone + collage reveal
 const hdr=$("hdr"),darks=[...document.querySelectorAll("[data-tone=dark]")];
 function onS(){const mk=document.querySelector(".hero .mark");hdr.classList.toggle("showwm",!mk||mk.getBoundingClientRect().bottom<70);hdr.classList.toggle("scrolled",scrollY>innerHeight*.6);const y=40;hdr.classList.toggle("on-dark",darks.some(d=>{const r=d.getBoundingClientRect();return r.top<=y&&r.bottom>=y;}));}
-addEventListener("scroll",onS,{passive:true});onS();
+let sT=0;addEventListener("scroll",()=>{if(!sT)sT=requestAnimationFrame(()=>{sT=0;onS();});},{passive:true});onS();
 if("IntersectionObserver" in window){new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");o.disconnect();}}),{threshold:.25}).observe($("collage"));}else $("collage").classList.add("in");
 
 // form
@@ -695,6 +695,4 @@ function siteSource(){try{const q=new URLSearchParams(location.search);const u=q
 document.querySelectorAll("[data-lb]").forEach(el=>{el.style.cursor="zoom-in";el.addEventListener("click",()=>{const n=el.dataset.lb,i=G.findIndex(g=>g[0]===n);openLB(G.map(g=>({src:`img/v/${g[0]}-1800.webp`,cap:g[1]})),i<0?0:i);track("photo_open",{photo:n});});});
 (window.requestIdleCallback||function(f){setTimeout(f,200)})(()=>renderAll(),{timeout:1500});
 
-(function(){const h=document.querySelector('.hero img');if(!h||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let t=0;
-addEventListener('scroll',()=>{if(t)return;t=requestAnimationFrame(()=>{t=0;const y=Math.min(scrollY,innerHeight);h.style.setProperty('--py',(y*0.3).toFixed(1)+'px');});},{passive:true});})();
 </script></body></html>
